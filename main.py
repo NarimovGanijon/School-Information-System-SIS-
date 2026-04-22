@@ -46,10 +46,10 @@ with sql.connect("data.db") as con:
 
     con.commit()
 
-    # проверка
-    cur.execute("SELECT * FROM user_data")
-    for row in cur.fetchall():
-        print(row)
+    # # проверка
+    # cur.execute("SELECT * FROM user_data")
+    # for row in cur.fetchall():
+    #     print(row)
 
 #     user_id = int(input())
 
@@ -59,3 +59,27 @@ with sql.connect("data.db") as con:
 # )
 
 # print(*cur.fetchone())  # только одна запись
+    cur.execute("""CREATE TABLE IF NOT EXISTS fanlar(
+                ID INTEGER PRIMARY KEY,
+                Subjects_name TEXT,
+                Teachers_name TEXT,
+                Count INTEGER
+                )""")
+    subjects=[
+        (1,"CS (Computer Science)","Nodirbek", 3),
+        (2,"English", "Feruza",3),
+        (3,"Mathematics","Temurbek",7),
+        (4,"Physics","Vohidjon",3),
+        (5,"History","Farzona",2),
+        (6,"Geography","Hamzabek",1)
+    ]
+    cur.executemany("""INSERT OR IGNORE INTO fanlar(id, Subjects_name, Teachers_name, Count )
+    VALUES (?,?,?,?)
+    """, subjects)
+    con.commit()
+
+
+
+    cur.execute("""CREATE TABLE IF NOT EXISTS baholar(
+                
+                )""")
